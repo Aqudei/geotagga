@@ -42,6 +42,8 @@
       this.on("successmultiple", function (files, response) {
         // Gets triggered when the files have successfully been sent.
         // Redirect user or notify of success.
+
+        window.location.replace("/batch/" + response.data.uuid);
       });
       this.on("errormultiple", function (files, response) {
         // Gets triggered when there was an error sending the files.

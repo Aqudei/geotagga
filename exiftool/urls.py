@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from exiftool.views import index,handler
+from exiftool.views import index,handler,batch
 
 urlpatterns = [
     path('', index),
     path('handler', handler, name='handler'),
+    path('batch/<str:uuid>', batch, name='batch'),
 ]

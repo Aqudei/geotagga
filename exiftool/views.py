@@ -3,6 +3,7 @@ import pdb
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from uuid import uuid4
+from exiftool.models import Batch
 
 # Create your views here.
 def index(request):
@@ -20,8 +21,14 @@ def handler(request):
     if request.method == "POST":
         excel = request.POST['excel']
         files = request.FILES.getlist('file')
-        import pdb; pdb.set_trace()
 
-    return JsonResponse({
+        return JsonResponse({
+            "batch_id" : f"{uuid}"
+        })
 
-    })
+def batch(request, uuid=None):
+    """
+    docstring
+    """
+    batch = Batch.objects.get(uuid=uuid)
+    return render(request,'exiftool/batch.html',{"batch":batch})
