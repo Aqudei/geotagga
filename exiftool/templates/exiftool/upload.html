@@ -1,13 +1,8 @@
 {% extends 'exiftool/base.html' %} {% load static %} {% block content %} `
 <form action="{% url 'handler' %}" class="dropzone" id="upload-form">
-  <!-- this is were the previews should be shown. -->
   <div class="previews" />
-  <!-- Now setup your input fields -->
-  <div class="form-group">
-    <input type="file" name="excel" value="excel" />
-  </div>
   {% csrf_token %}
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary float-right">Submit</button>
 </form>
 
 {% endblock content %} {% block postscripts %}
@@ -30,6 +25,14 @@
           // Make sure that the form isn't actually being sent.
           e.preventDefault();
           e.stopPropagation();
+
+          var f = myDropzone.files.find((f) => f.type.includes("sheet"));
+          console.log(f);
+          if (!f) {
+            alert("Please upload excel file also");
+            return;
+          }
+
           myDropzone.processQueue();
         });
 
@@ -42,8 +45,14 @@
       this.on("successmultiple", function (files, response) {
         // Gets triggered when the files have successfully been sent.
         // Redirect user or notify of success.
-
-        window.location.replace("/batch/" + response.data.uuid);
+        console.log("@successmultiple response", response);
+        window.location.replace("/batch/" + response.batch_id);
+      });
+      this.on("success", function (files, response) {
+        // Gets triggered when the files have successfully been sent.
+        // Redirect user or notify of success.
+        console.log("@success response", response);
+        window.location.replace("/batch/" + response.batch_id);
       });
       this.on("errormultiple", function (files, response) {
         // Gets triggered when there was an error sending the files.

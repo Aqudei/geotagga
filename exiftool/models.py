@@ -27,7 +27,7 @@ class Picture(models.Model):
     )
     image = models.ImageField(_("Image"))
     batch = models.ForeignKey(Batch, verbose_name=_("Batch"), on_delete=models.CASCADE)
-    status = models.CharField(max_length=20, choices=STATUSES)
+    status = models.CharField(max_length=20, choices=STATUSES, default="PENDING")
 
     class Meta:
         verbose_name = _("picture")
