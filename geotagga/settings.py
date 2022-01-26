@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-)$y@%8lf-_fe6qo4v7_mzemde#j)-qwz)y-(s0y91&z61tqmo%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.geotagga.com']
 
 
 # Application definition
